@@ -1,29 +1,30 @@
 {
-    "name": "teamnovu/localize",
-    "description": "Localize allows you to easily translate i18n files within Statamic",
+    "name": "teamfurther/statamic-localize",
+    "description": "Localize allows you to easily translate i18n files within Statamic.",
+    "keywords": [
+        "further",
+        "furtherdigitalsolutions",
+        "statamic",
+        "localize",
+        "localization",
+        "i18n"
+    ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Further Digital Solutions",
+            "email": "hello@gofurther.digital"
+        }
+    ],
     "autoload": {
         "psr-4": {
-            "Teamnovu\\Localize\\": "src"
+            "Teamfurther\\Localize\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Teamnovu\\Localize\\Tests\\": "tests"
+            "Teamfurther\\Localize\\Tests\\": "tests"
         }
-    },
-    "authors": [
-        {
-            "name": "Patrick Stillhart",
-            "email": "patrick@stillh.art"
-        }
-    ],
-    "require": {
-        "php": "^8.2",
-        "statamic/cms": "^5.0"
-    },
-    "require-dev": {
-        "orchestra/testbench": "^9.0"
     },
     "config": {
         "allow-plugins": {
@@ -37,9 +38,17 @@
         },
         "laravel": {
             "providers": [
-                "Teamnovu\\Localize\\ServiceProvider"
+                "Teamfurther\\Localize\\ServiceProvider"
             ]
         }
     },
-    "prefer-stable": true
+    "require": {
+        "php": "^8.2",
+        "statamic/cms": "^5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0"
+    },
+    "prefer-stable": true,
+    "version": "1.0.0"
 }

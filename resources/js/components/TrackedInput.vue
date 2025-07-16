@@ -1,6 +1,6 @@
 <template>
     <div class="relative w-full">
-        <span v-if="isDirty" class="absolute novu-right-3 novu-mt-[0.4rem] novu-pointer-events-none novu-text-[rgb(67,169,255)]" aria-label="has changed">•</span>
+        <span v-if="isDirty" class="absolute statamic-localize-right-3 statamic-localize-mt-[0.4rem] statamic-localize-pointer-events-none statamic-localize-text-[rgb(67,169,255)]" aria-label="has changed">•</span>
         <input v-bind="$attrs" v-model="trackedValue" :name="name" class="input-text">
     </div>
 </template>
@@ -27,8 +27,12 @@ export default {
     },
     watch: {
         isDirty(isDirty) {
-            if (isDirty) this.$dirty.add(this.name);
-            else this.$dirty.remove(this.name);
+            if (isDirty) Statamic.$dirty.add(this.name);
+            else Statamic.$dirty.remove(this.name);
+        },
+        // In Vue 2, props are automatically watched and can trigger updates
+        value(newValue) {
+            this.trackedValue = newValue;
         }
     },
 }
