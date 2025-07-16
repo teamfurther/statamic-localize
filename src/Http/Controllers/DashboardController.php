@@ -1,13 +1,20 @@
 <?php
 
-namespace Teamnovu\Localize\Http\Controllers;
+namespace Teamfurther\Localize\Http\Controllers;
 
 use Statamic\Facades\Site;
 use Illuminate\Http\Request;
-use Teamnovu\Localize\Services\LangFileService;
+use Teamfurther\Localize\Services\LangFileService;
 
 class DashboardController
 {
+    private LangFileService $langFileService;
+
+    public function __construct()
+    {
+        $this->langFileService = resolve(LangFileService::class);
+    }
+
     public function index()
     {
         return view('localize::dashboard', [
@@ -26,11 +33,11 @@ class DashboardController
                 return;
             }
 
-            $original = LangFileService::get($key);
+            $original = $this->langFileService->get($key);
 
             $updated = array_replace_recursive($original, $translation[$key]);
 
-            LangFileService::put($key, $updated);
+            $this->langFileService->put($key, $updated);
         });
 
         return response()->json([
@@ -44,7 +51,7 @@ class DashboardController
         return Site::all()->map(fn ($site) => [
             'handle' => $site->handle(),
             'name' => $site->name(),
-            'translations' => LangFileService::get($site->handle()),
+            'translations' => $this->langFileService->get($site->handle()),
         ]);
     }
 }

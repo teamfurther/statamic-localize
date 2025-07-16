@@ -11,19 +11,12 @@
 
 ## Installation
 
-You can install Localize via the Statamic control panel or using Composer:
-
-### Statamic Control Panel
-
-1. Go to `Tools > Addons` in your Statamic control panel.
-2. Search for **Localize** and click **Install**.
-
-### Composer
+You can install Localize using Composer:
 
 From your project root, run:
 
 ```bash
-composer require teamnovu/localize
+composer require teamfurther/statamic-localize
 ```
 
 ## Configuration
@@ -34,7 +27,7 @@ composer require teamnovu/localize
 After installation, you may wish to publish the package configuration:
 
 ```bash
-php artisan vendor:publish --provider="TeamNovu\\Localize\\LocalizeServiceProvider"
+php artisan vendor:publish --provider="Teamfurther\\Localize\\LocalizeServiceProvider"
 ```
 
 This will create a `localize.php` config file in your `config` directory.
@@ -53,8 +46,29 @@ If you use Statamic's Git integration and want to track changes to your language
 ## API
 
 If you enable the JSON API, your translations can be accessed programmatically. See the package configuration for details.
-If not changed the default route is `/api/localize/LANG.json`
+If not changed the default route is `/api/localize/{lang}.json`
+
+## Development
+
+### Building Assets
+
+This package uses Vite and Vue 3 for its frontend assets. To build the assets:
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. For development (with hot reloading):
+```bash
+npm run dev
+```
+
+3. For production build:
+```bash
+npm run build
+```
 
 ## Support
 
-For issues, feature requests, or contributions, please open an issue or pull request on [GitHub](https://github.com/teamnovu/localize).
+For issues, feature requests, or contributions, please open an issue or pull request on [GitHub](https://github.com/teamfurther/statamic-localize).

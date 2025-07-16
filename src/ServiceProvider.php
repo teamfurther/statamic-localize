@@ -1,6 +1,6 @@
 <?php
 
-namespace Teamnovu\Localize;
+namespace Teamfurther\Localize;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
@@ -9,8 +9,8 @@ use Statamic\Facades\Permission;
 use Statamic\Facades\Site;
 use Statamic\Providers\AddonServiceProvider;
 use Statamic\Statamic;
-use Teamnovu\Localize\Http\Controllers\PublicController;
-use Teamnovu\Localize\Services\LangFileService;
+use Teamfurther\Localize\Http\Controllers\PublicController;
+use Teamfurther\Localize\Services\LangFileService;
 
 class ServiceProvider extends AddonServiceProvider
 {
@@ -33,10 +33,14 @@ class ServiceProvider extends AddonServiceProvider
         });
 
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'localize');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'localize');
 
         $this->publishes([
             __DIR__.'/../config/localize.php' => config_path('localize.php'),
         ], 'localize-config');
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/localize.php', 'localize'
+        );
 
         $this->bootAddonPermissions();
         $this->bootAddonNav();

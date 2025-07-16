@@ -1,13 +1,13 @@
 <template>
-    <Entry v-if="inputType(value)" :name="name" :value="value" :path="path" class="pl-3 novu-pr-0" />
-    <fieldset v-else class="border dark:border-dark-900 rounded shadow-sm !novu-p-2 novu-mt-5 section">
-        <legend class="novu-translate-y-[-65%] absolute">
-            <Compoennt :is="parent ? 'h3' : 'h4'" class="bg-white dark:bg-dark-600 inline-block novu-px-3">
+    <Entry v-if="inputType(value)" :name="name" :value="value" :path="path" class="pl-3 statamic-localize-pr-0" />
+    <fieldset v-else class="border dark:border-dark-900 rounded shadow-sm !statamic-localize-p-2 statamic-localize-mt-5 section">
+        <legend class="statamic-localize-translate-y-[-65%] absolute">
+            <component :is="parent ? 'h3' : 'h4'" class="bg-white dark:bg-dark-600 inline-block statamic-localize-px-3">
                 {{ deslug(name) }}
-            </Compoennt>
+            </component>
         </legend>
 
-        <Group :name="key" :value="children" :path="[...path, name]" v-for="children, key of value" :key="key" />
+        <Group :name="key" :value="children" :path="[...path, name]" v-for="(children, key) in value" :key="key" />
 
     </fieldset>
 </template>

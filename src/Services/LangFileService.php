@@ -1,19 +1,23 @@
 <?php
 
-namespace Teamnovu\Localize\Services;
+namespace Teamfurther\Localize\Services;
 
 use Illuminate\Support\Facades\File;
+use Statamic\Facades\Site;
 
 class LangFileService
 {
-    public static function path(string $site): string
+    public function path(string $site): string
     {
-        return base_path(config('localize.folder')."/{$site}.json");
+        $lang = Site::get($site);
+
+        return base_path(config('localize.folder')."/{$lang->lang()}.json");
     }
 
-    public static function get(string $site): array
+    public function get(string $site): array
     {
         $path = LangFileService::path($site);
+
         if (! File::exists($path)) {
             return [];
         }
@@ -21,7 +25,7 @@ class LangFileService
         return json_decode(File::get($path), true);
     }
 
-    public static function put(string $site, array $content): void
+    public function put(string $site, array $content): void
     {
         $json = json_encode(
             $content,

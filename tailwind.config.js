@@ -1,5 +1,5 @@
 module.exports = {
-    prefix: 'novu-',
+    prefix: 'statamic-localize-',
     important: true,
     content: [
         './resources/views/**/*.{html,php}',

@@ -1,16 +1,23 @@
 <?php
 
-namespace Teamnovu\Localize\Http\Controllers;
+namespace Teamfurther\Localize\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use Teamnovu\Localize\Services\LangFileService;
+use Teamfurther\Localize\Services\LangFileService;
 
 class PublicController extends Controller
 {
+    private LangFileService $langFileService;
+
+    public function __construct()
+    {
+        $this->langFileService = resolve(LangFileService::class);
+    }
+
     public function serve()
     {
         $site = \Request::segment(3);
-        $path = LangFileService::path($site);
+        $path = $this->langFileService->path($site);
 
         return response()
             ->file($path, [
