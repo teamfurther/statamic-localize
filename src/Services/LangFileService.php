@@ -16,7 +16,7 @@ class LangFileService
 
     public function get(string $site): array
     {
-        $path = LangFileService::path($site);
+        $path = $this->path($site);
 
         if (! File::exists($path)) {
             return [];
@@ -32,6 +32,6 @@ class LangFileService
             JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
         );
 
-        File::put(LangFileService::path($site), $json);
+        File::put($this->path($site), $json);
     }
 }

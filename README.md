@@ -52,7 +52,7 @@ If not changed the default route is `/api/localize/{lang}.json`
 
 ### Building Assets
 
-This package uses Vite and Vue 3 for its frontend assets. To build the assets:
+This package uses Vite and Vue 2 for its frontend assets. To build the assets:
 
 1. Install dependencies:
 ```bash

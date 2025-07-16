@@ -50,8 +50,10 @@ class ServiceProvider extends AddonServiceProvider
 
     protected function ensureFiles()
     {
-        Site::all()->each(function ($site) {
-            $path = LangFileService::path($site->handle());
+        $langFileService = resolve(LangFileService::class);
+
+        Site::all()->each(function ($site) use ($langFileService) {
+            $path = $langFileService->path($site->handle());
             File::ensureDirectoryExists(dirname($path));
             if (! File::exists($path)) {
                 File::put($path, '{}');

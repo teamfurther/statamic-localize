@@ -1,1 +1,98 @@
-html{scroll-padding-top:20vh}.blink{animation-name:blink;animation-duration:.8s;animation-iteration-count:3}@keyframes blink{50%{opacity:.5}0%,to{opacity:1}}.statamic-localize-pointer-events-none{pointer-events:none!important}.statamic-localize-right-3{right:.75rem!important}.statamic-localize-float-right{float:right!important}.statamic-localize-m-\[0_-2px_-2px_0\]{margin:0 -2px -2px 0!important}.statamic-localize-mb-1{margin-bottom:.25rem!important}.statamic-localize-mb-6{margin-bottom:1.5rem!important}.statamic-localize-mt-5{margin-top:1.25rem!important}.statamic-localize-mt-\[0\.4rem\]{margin-top:.4rem!important}.statamic-localize-w-\[2\.5rem\]{width:2.5rem!important}.statamic-localize-w-\[8rem\]{width:8rem!important}.statamic-localize-grow{flex-grow:1!important}.statamic-localize-translate-y-\[-65\%\]{--tw-translate-y: -65% !important;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))!important}.statamic-localize-flex-wrap{flex-wrap:wrap!important}.statamic-localize-items-center{align-items:center!important}.statamic-localize-overflow-hidden{overflow:hidden!important}.\!statamic-localize-p-2{padding:.5rem!important}.\!statamic-localize-px-3,.statamic-localize-px-3{padding-left:.75rem!important;padding-right:.75rem!important}.statamic-localize-pr-0{padding-right:0!important}.statamic-localize-pr-\[2px\]{padding-right:2px!important}.statamic-localize-text-\[rgb\(67\,169\,255\)\]{--tw-text-opacity: 1 !important;color:rgb(67 169 255 / var(--tw-text-opacity, 1))!important}.statamic-localize-transition-all{transition-property:all!important;transition-timing-function:cubic-bezier(.4,0,.2,1)!important;transition-duration:.15s!important}@media (min-width: 768px){.md\:statamic-localize-w-\[15rem\]{width:15rem!important}}.section+.\[\.section\+\&\]\:statamic-localize-mt-6{margin-top:1.5rem!important}
+
+html {
+    scroll-padding-top: 20vh;
+}
+.blink {
+    animation-name: blink;
+    animation-duration: 0.8s;
+    animation-iteration-count: 3;
+}
+@keyframes blink {
+50% {
+      opacity: 0.5;
+}
+0%,
+    100% {
+      opacity: 1;
+}
+}
+.statamic-localize-pointer-events-none {
+    pointer-events: none !important
+}
+.statamic-localize-right-3 {
+    right: 0.75rem !important
+}
+.statamic-localize-float-right {
+    float: right !important
+}
+.statamic-localize-m-\[0_-2px_-2px_0\] {
+    margin: 0 -2px -2px 0 !important
+}
+.statamic-localize-mb-1 {
+    margin-bottom: 0.25rem !important
+}
+.statamic-localize-mb-6 {
+    margin-bottom: 1.5rem !important
+}
+.statamic-localize-mt-5 {
+    margin-top: 1.25rem !important
+}
+.statamic-localize-mt-\[0\.4rem\] {
+    margin-top: 0.4rem !important
+}
+.statamic-localize-w-\[2\.5rem\] {
+    width: 2.5rem !important
+}
+.statamic-localize-w-\[8rem\] {
+    width: 8rem !important
+}
+.statamic-localize-grow {
+    flex-grow: 1 !important
+}
+.statamic-localize-translate-y-\[-65\%\] {
+    --tw-translate-y: -65% !important;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important
+}
+.statamic-localize-flex-wrap {
+    flex-wrap: wrap !important
+}
+.statamic-localize-items-center {
+    align-items: center !important
+}
+.statamic-localize-overflow-hidden {
+    overflow: hidden !important
+}
+.\!statamic-localize-p-2 {
+    padding: 0.5rem !important
+}
+.\!statamic-localize-px-3 {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important
+}
+.statamic-localize-px-3 {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important
+}
+.statamic-localize-pr-0 {
+    padding-right: 0px !important
+}
+.statamic-localize-pr-\[2px\] {
+    padding-right: 2px !important
+}
+.statamic-localize-text-\[rgb\(67\,169\,255\)\] {
+    --tw-text-opacity: 1 !important;
+    color: rgb(67 169 255 / var(--tw-text-opacity, 1)) !important
+}
+.statamic-localize-transition-all {
+    transition-property: all !important;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-duration: 150ms !important
+}
+@media (min-width: 768px) {
+    .md\:statamic-localize-w-\[15rem\] {
+        width: 15rem !important
+    }
+}
+.section+.\[\.section\+\&\]\:statamic-localize-mt-6 {
+    margin-top: 1.5rem !important
+}

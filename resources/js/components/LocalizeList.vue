@@ -99,7 +99,7 @@ export default {
     },
 
     mounted() {
-        // In Vue 3, $keys is accessed through the global property
+        // In Vue 2, $keys is accessed directly
         this.saveKeyBinding = Statamic.$keys.bindGlobal(
             ['mod+s', 'mod+return'],
             (e) => {
@@ -113,14 +113,14 @@ export default {
         deslug,
         inputType,
         save() {
-            // In Vue 3, $axios is accessed through the global property
+            // In Vue 2, $axios is accessed directly
             Statamic.$axios({
                 method: "POST",
                 url: this.action,
                 data: this.$refs.form,
             })
                 .then((response) => {
-                    // In Vue 3, $toast is accessed through the global property
+                    // In Vue 2, $toast is accessed directly
                     Statamic.$toast.success(response.data.status)
                     this.trackedSites = Object.assign(this.trackedSites, response.data.sites)
                 })
@@ -139,8 +139,8 @@ export default {
         },
     },
 
-    // In Vue 3, destroyed is renamed to unmounted
-    unmounted() {
+    // In Vue 2, use destroyed instead of unmounted
+    destroyed() {
         this.saveKeyBinding.destroy()
     },
 }

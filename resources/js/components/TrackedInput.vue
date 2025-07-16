@@ -30,7 +30,7 @@ export default {
             if (isDirty) Statamic.$dirty.add(this.name);
             else Statamic.$dirty.remove(this.name);
         },
-        // In Vue 3, we need to update the tracked value when the prop changes
+        // In Vue 2, props are automatically watched and can trigger updates
         value(newValue) {
             this.trackedValue = newValue;
         }

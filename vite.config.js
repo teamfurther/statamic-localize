@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import vue from '@vitejs/plugin-vue2';
 import path from 'path';
 
 export default defineConfig({
@@ -10,6 +10,8 @@ export default defineConfig({
         outDir: 'resources/dist',
         emptyOutDir: true,
         manifest: true,
+        sourcemap: false,
+        minify: false,
         rollupOptions: {
             input: {
                 cp: 'resources/js/cp.js',
