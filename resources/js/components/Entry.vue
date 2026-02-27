@@ -1,37 +1,34 @@
 <template>
-    <div class="form-group flex gap-3 py-1 [.section+&]:statamic-localize-mt-6 statamic-localize-flex-wrap" blink-target>
+    <div class="flex flex-wrap gap-3 py-1">
         <!-- label -->
-        <div class="field-inner truncate w-full md:statamic-localize-w-[15rem] mt-2">
-            <label :for="`${site}.${pathName}`" class="publish-field-label" :title="pathName">
+        <div class="md:w-64 mt-2 truncate w-full">
+            <label :for="`${site}.${pathName}`" :title="pathName" class="font-medium text-sm">
                 <a :href="`#${site}.${pathName}`" @click="setAnchor">
                     {{ deslug(name) }}
                 </a>
             </label>
         </div>
 
-        <div class="flex gap-4 flex-col statamic-localize-grow">
+        <div class="flex flex-col grow">
             <!-- main input -->
-            <div class="flex gap-2">
+            <div class="flex gap-3">
                 <TrackedInput :id="`${site}.${pathName}`" :name="formName" :value="value" :placeholder="value" />
-                <button v-if="altCount" class="btn !statamic-localize-px-3 statamic-localize-w-[2.5rem]" type="button" @click="expanded">
-                    <svg-icon name="translate" />
-                </button>
+                <Button icon="hierarchy" @click="expanded" />
             </div>
 
             <!-- alternatives -->
             <div
                 v-if="details"
-                class="statamic-localize-transition-all statamic-localize-overflow-hidden statamic-localize-m-[0_-2px_-2px_0]"
+                class="-mr-1 mt-4 overflow-hidden transition-all"
                 :style="{
-                    height: grow ? altCount * (38 + 8) + 2 + 'px' : 0
+                    height: grow ? altCount * (40 + 12) + 2 + 'px' : 0
                 }"
             >
-                <div class="pt-2 flex gap-2 flex-col statamic-localize-pr-[2px]">
-                    <div v-for="alt in alternatives" :key="alt.handle" class="flex gap-4 statamic-localize-items-center" blink-target>
-                        <div class="field-inner truncate statamic-localize-w-[8rem]">
+                <div class="flex flex-col gap-3 pr-1 pt-2">
+                    <div v-for="alt in alternatives" :key="alt.handle" class="flex gap-4 items-center">
+                        <div class="truncate w-40">
                             <label
                                 :for="`${alt.handle}.${pathName}`"
-                                class="publish-field-label"
                             >
                                 <a :href="`#${alt.handle}.${pathName}`" @click="setAnchor">
                                     {{ alt.name }}
@@ -51,10 +48,12 @@
 </template>
 
 <script>
-import { deslug, walkObject } from '../utils'
 import TrackedInput from './TrackedInput.vue'
+import { deslug, walkObject } from '../utils'
+import { Button } from '@ui';
 export default {
     components: {
+        Button,
         TrackedInput,
     },
     props: {
@@ -92,7 +91,7 @@ export default {
     methods: {
         deslug,
         expanded() {
-            this.details = true
+            this.details = !this.details
             setTimeout(() => { this.grow = !this.grow }, 10)
         },
         setAnchor(e) {
@@ -108,7 +107,7 @@ export default {
         const path = hash.substring(hash.indexOf('.') + 1)
 
         if (path === this.pathName) {
-            if(site !== this.site) {
+            if (site !== this.site) {
                 this.details = true
                 this.grow = true
             }
@@ -117,31 +116,9 @@ export default {
                 const el = document.getElementById(window.location.hash.substring(1))
                 if (!el) return
 
-                el.closest('[blink-target]').classList.add('blink')
                 el.focus()
             }, 10)
         }
     }
 }
 </script>
-
-<style>
-html {
-    scroll-padding-top: 20vh;
-}
-
-.blink {
-    animation-name: blink;
-    animation-duration: 0.8s;
-    animation-iteration-count: 3;
-}
-@keyframes blink {
-    50% {
-      opacity: 0.5;
-    }
-    0%,
-    100% {
-      opacity: 1;
-    }
-}
-</style>

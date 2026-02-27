@@ -1,35 +1,24 @@
 <template>
-    <form @submit.prevent="save" ref="form">
+    <form class="max-w-5xl 3xl:max-w-5xl 3xl:max-w-6xl mx-auto" @submit.prevent="save" ref="form">
+        <Header :title="__('localize::general.title')" icon="dictionary-language-book">
+            <Button :text="__('Save')" type="submit" variant="primary" />
+        </Header>
+        <p v-html="__('localize::general.intro')" class="mb-6 text-sm"></p>
 
-        <header class="mb-8">
-            <button class="statamic-localize-float-right btn-primary">{{ __('Save') }}</button>
-            <h1>{{ __('localize::general.title') }}</h1>
-            <p v-html="__('localize::general.intro')"></p>
-        </header>
+        <Entry v-for="(value, first) in strings" :key="first" :name="first" :value="value" :path="[]" />
 
-        <section v-if="Object.keys(strings).length" class="card py-5 px-6 content statamic-localize-mb-6 form-group">
-            <Entry v-for="(value, first) in strings" :key="first" :name="first" :value="value" :path="[]" class="px-0" />
-        </section>
-
-        <section v-for="(value, first) in objects" :key="first" class="card p-0 content statamic-localize-mb-6 form-group">
-            <header class="publish-section-header @container">
-                <div class="publish-section-header-inner">
-                    <h2 class="text-base font-semibold mb-1">{{ deslug(first) }}</h2>
-                </div>
-            </header>
-            <div class="py-5 px-6">
+        <Panel v-for="(value, first) in objects" :heading="deslug(first)" :key="first" class="mt-6">
+            <Card>
                 <template v-for="(secondValue, second) in value" :key="second">
-                    <Entry v-if="inputType(secondValue)" :name="second" :value="secondValue" :path="[first]"
-                        class="px-0" />
-                    <Group v-else :name="second" :value="secondValue" :path="[first]" parent class="statamic-localize-mb-1" />
+                    <Entry v-if="inputType(secondValue)" :name="second" :value="secondValue" :path="[first]" />
+                    <Group v-else :name="second" :value="secondValue" :path="[first]" parent />
                 </template>
-            </div>
-        </section>
+            </Card>
+        </Panel>
 
-        <section v-if="Object.values(translations).length === 0" class="card p-6 content">
+        <Card v-if="Object.values(translations).length === 0">
             <p>{{ __('localize::general.no_content') }}</p>
-        </section>
-
+        </Card>
     </form>
 </template>
 
@@ -37,11 +26,17 @@
 import Entry from './Entry.vue'
 import Group from './Group.vue'
 import { deslug, inputType } from '../utils'
+import { Button, Card, Header, Panel } from '@ui';
+import { computed } from 'vue'
 
 export default {
     components: {
+        Button,
+        Card,
         Entry,
         Group,
+        Header,
+        Panel,
     },
 
     props: {
@@ -94,13 +89,12 @@ export default {
     provide() {
         return {
             site: this.site,
-            sites: this.trackedSites,
+            sites: computed(() => this.trackedSites),
         }
     },
 
     mounted() {
-        // In Vue 2, $keys is accessed directly
-        this.saveKeyBinding = Statamic.$keys.bindGlobal(
+        this.saveKeyBinding = this.$keys.bindGlobal(
             ['mod+s', 'mod+return'],
             (e) => {
                 e.preventDefault()
@@ -113,15 +107,13 @@ export default {
         deslug,
         inputType,
         save() {
-            // In Vue 2, $axios is accessed directly
-            Statamic.$axios({
+            this.$axios({
                 method: "POST",
                 url: this.action,
                 data: this.$refs.form,
             })
                 .then((response) => {
-                    // In Vue 2, $toast is accessed directly
-                    Statamic.$toast.success(response.data.status)
+                    this.$toast.success(response.data.status)
                     this.trackedSites = Object.assign(this.trackedSites, response.data.sites)
                 })
                 .catch((error) => this.handleAxiosError(error))
@@ -130,17 +122,16 @@ export default {
             if (e.response && e.response.status === 422) {
                 const { message, errors } = e.response.data
                 console.error(errors);
-                Statamic.$toast.error(message)
+                this.$toast.error(message)
             } else if (e.response) {
-                Statamic.$toast.error(e.response.data.message)
+                this.$toast.error(e.response.data.message)
             } else {
-                Statamic.$toast.error(e || 'Something went wrong')
+                this.$toast.error(e || 'Something went wrong')
             }
         },
     },
 
-    // In Vue 2, use destroyed instead of unmounted
-    destroyed() {
+    unmounted() {
         this.saveKeyBinding.destroy()
     },
 }

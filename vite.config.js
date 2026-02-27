@@ -1,10 +1,12 @@
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue2';
+import statamic from '@statamic/cms/vite-plugin';
+import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
 export default defineConfig({
     plugins: [
-        vue(),
+        statamic(),
+        tailwindcss(),
     ],
     build: {
         outDir: 'resources/dist',
@@ -31,6 +33,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'resources/js'),
+            '@ui': '@statamic/cms/ui',
         },
     },
 });

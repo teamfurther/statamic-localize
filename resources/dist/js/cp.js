@@ -1,83 +1,12 @@
-function inputType(value) {
-  if (value === null)
-    return true;
-  if (typeof value === "string")
-    return true;
-  if (typeof value === "number")
-    return true;
-  return false;
-}
-function deslug(string = "") {
-  if (typeof string !== "string") {
-    return string;
+const Vue = window.Vue;
+const { BaseTransition, BaseTransitionPropsValidators, Comment, DeprecationTypes, EffectScope, ErrorCodes, ErrorTypeStrings, Fragment, KeepAlive, ReactiveEffect, Static, Suspense, Teleport, Text, TrackOpTypes, Transition, TransitionGroup, TriggerOpTypes, VueElement, __esModule, assertNumber, callWithAsyncErrorHandling, callWithErrorHandling, camelize, capitalize, cloneVNode, compatUtils, compile, computed, createApp, createBlock, createCommentVNode, createElementBlock, createElementVNode, createHydrationRenderer, createPropsRestProxy, createRenderer, createSSRApp, createSlots, createStaticVNode, createTextVNode, createVNode, customRef, defineAsyncComponent, defineComponent, defineCustomElement, defineEmits, defineExpose, defineModel, defineOptions, defineProps, defineSSRCustomElement, defineSlots, devtools, effect, effectScope, getCurrentInstance, getCurrentScope, getCurrentWatcher, getTransitionRawChildren, guardReactiveProps, h, handleError, hasInjectionContext, hydrate, hydrateOnIdle, hydrateOnInteraction, hydrateOnMediaQuery, hydrateOnVisible, initCustomFormatter, initDirectivesForSSR, inject, isMemoSame, isProxy, isReactive, isReadonly, isRef, isRuntimeOnly, isShallow, isVNode, markRaw, mergeDefaults, mergeModels, mergeProps, nextTick, nodeOps, normalizeClass, normalizeProps, normalizeStyle, onActivated, onBeforeMount, onBeforeUnmount, onBeforeUpdate, onDeactivated, onErrorCaptured, onMounted, onRenderTracked, onRenderTriggered, onScopeDispose, onServerPrefetch, onUnmounted, onUpdated, onWatcherCleanup, openBlock, patchProp, popScopeId, provide, proxyRefs, pushScopeId, queuePostFlushCb, reactive, readonly, ref, registerRuntimeCompiler, render, renderList, renderSlot, resolveComponent, resolveDirective, resolveDynamicComponent, resolveFilter, resolveTransitionHooks, setBlockTracking, setDevtoolsHook, setTransitionHooks, shallowReactive, shallowReadonly, shallowRef, ssrContextKey, ssrUtils, stop, toDisplayString, toHandlerKey, toHandlers, toRaw, toRef, toRefs, toValue, transformVNodeArgs, triggerRef, unref, useAttrs, useCssModule, useCssVars, useHost, useId, useModel, useSSRContext, useShadowRoot, useSlots, useTemplateRef, useTransitionState, vModelCheckbox, vModelDynamic, vModelRadio, vModelSelect, vModelText, vShow, version, warn, watch, watchEffect, watchPostEffect, watchSyncEffect, withAsyncContext, withCtx, withDefaults, withDirectives, withKeys, withMemo, withModifiers, withScopeId } = Vue;
+const _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target[key] = val;
   }
-  return string.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()).replace(/([a-z])([A-Z])/g, "$1 $2");
-}
-function walkObject(object, path, name) {
-  let sub = object;
-  for (let step of path) {
-    sub = sub[step];
-    if (!sub)
-      return void 0;
-  }
-  return sub[name];
-}
-function normalizeComponent(scriptExports, render5, staticRenderFns, functionalTemplate, injectStyles, scopeId, moduleIdentifier, shadowMode) {
-  var options = typeof scriptExports === "function" ? scriptExports.options : scriptExports;
-  if (render5) {
-    options.render = render5;
-    options.staticRenderFns = staticRenderFns;
-    options._compiled = true;
-  }
-  if (functionalTemplate) {
-    options.functional = true;
-  }
-  if (scopeId) {
-    options._scopeId = "data-v-" + scopeId;
-  }
-  var hook;
-  if (moduleIdentifier) {
-    hook = function(context) {
-      context = context || // cached call
-      this.$vnode && this.$vnode.ssrContext || // stateful
-      this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext;
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== "undefined") {
-        context = __VUE_SSR_CONTEXT__;
-      }
-      if (injectStyles) {
-        injectStyles.call(this, context);
-      }
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier);
-      }
-    };
-    options._ssrRegister = hook;
-  } else if (injectStyles) {
-    hook = shadowMode ? function() {
-      injectStyles.call(
-        this,
-        (options.functional ? this.parent : this).$root.$options.shadowRoot
-      );
-    } : injectStyles;
-  }
-  if (hook) {
-    if (options.functional) {
-      options._injectStyles = hook;
-      var originalRender = options.render;
-      options.render = function renderWithStyleInjection(h, context) {
-        hook.call(context);
-        return originalRender(h, context);
-      };
-    } else {
-      var existing = options.beforeCreate;
-      options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-    }
-  }
-  return {
-    exports: scriptExports,
-    options
-  };
-}
+  return target;
+};
 const _sfc_main$3 = {
   inheritAttrs: false,
   props: {
@@ -91,61 +20,186 @@ const _sfc_main$3 = {
   },
   computed: {
     isDirty() {
-      if (!this.trackedValue && !this.value)
-        return false;
+      if (!this.trackedValue && !this.value) return false;
       return this.trackedValue != this.value;
     }
   },
   watch: {
     isDirty(isDirty) {
-      if (isDirty)
-        Statamic.$dirty.add(this.name);
-      else
-        Statamic.$dirty.remove(this.name);
+      if (isDirty) Statamic.$dirty.add(this.name);
+      else Statamic.$dirty.remove(this.name);
     },
-    // In Vue 2, props are automatically watched and can trigger updates
     value(newValue) {
       this.trackedValue = newValue;
     }
   }
 };
-var _sfc_render$3 = function render() {
-  var _vm = this, _c = _vm._self._c;
-  return _c("div", { staticClass: "relative w-full" }, [_vm.isDirty ? _c("span", { staticClass: "absolute statamic-localize-right-3 statamic-localize-mt-[0.4rem] statamic-localize-pointer-events-none statamic-localize-text-[rgb(67,169,255)]", attrs: { "aria-label": "has changed" } }, [_vm._v("•")]) : _vm._e(), _vm.$attrs.type === "checkbox" ? _c("input", _vm._b({ directives: [{ name: "model", rawName: "v-model", value: _vm.trackedValue, expression: "trackedValue" }], staticClass: "input-text", attrs: { "name": _vm.name, "type": "checkbox" }, domProps: { "checked": Array.isArray(_vm.trackedValue) ? _vm._i(_vm.trackedValue, null) > -1 : _vm.trackedValue }, on: { "change": function($event) {
-    var $$a = _vm.trackedValue, $$el = $event.target, $$c = $$el.checked ? true : false;
-    if (Array.isArray($$a)) {
-      var $$v = null, $$i = _vm._i($$a, $$v);
-      if ($$el.checked) {
-        $$i < 0 && (_vm.trackedValue = $$a.concat([$$v]));
-      } else {
-        $$i > -1 && (_vm.trackedValue = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
-      }
-    } else {
-      _vm.trackedValue = $$c;
-    }
-  } } }, "input", _vm.$attrs, false)) : _vm.$attrs.type === "radio" ? _c("input", _vm._b({ directives: [{ name: "model", rawName: "v-model", value: _vm.trackedValue, expression: "trackedValue" }], staticClass: "input-text", attrs: { "name": _vm.name, "type": "radio" }, domProps: { "checked": _vm._q(_vm.trackedValue, null) }, on: { "change": function($event) {
-    _vm.trackedValue = null;
-  } } }, "input", _vm.$attrs, false)) : _c("input", _vm._b({ directives: [{ name: "model", rawName: "v-model", value: _vm.trackedValue, expression: "trackedValue" }], staticClass: "input-text", attrs: { "name": _vm.name, "type": _vm.$attrs.type }, domProps: { "value": _vm.trackedValue }, on: { "input": function($event) {
-    if ($event.target.composing)
-      return;
-    _vm.trackedValue = $event.target.value;
-  } } }, "input", _vm.$attrs, false))]);
+const _hoisted_1$2 = { class: "relative w-full" };
+const _hoisted_2$1 = {
+  key: 0,
+  class: "absolute right-3 mt-[0.4rem] pointer-events-none text-[rgb(67,169,255)]",
+  "aria-label": "has changed"
 };
-var _sfc_staticRenderFns$3 = [];
-var __component__$3 = /* @__PURE__ */ normalizeComponent(
-  _sfc_main$3,
-  _sfc_render$3,
-  _sfc_staticRenderFns$3,
-  false,
-  null,
-  null,
-  null,
-  null
-);
-const TrackedInput = __component__$3.exports;
-const Entry_vue_vue_type_style_index_0_lang = "";
+const _hoisted_3$1 = ["name"];
+function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$2, [
+    $options.isDirty ? (openBlock(), createElementBlock("span", _hoisted_2$1, "•")) : createCommentVNode("", true),
+    withDirectives(createElementVNode("input", mergeProps(_ctx.$attrs, {
+      "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.trackedValue = $event),
+      name: $props.name,
+      class: "w-full block bg-white dark:bg-gray-900 border border-gray-300 with-contrast:border-gray-500 dark:border-gray-700 dark:with-contrast:border-gray-500 dark:inset-shadow-2xs dark:inset-shadow-black text-gray-925 dark:text-gray-300 placeholder:text-gray-500 dark:placeholder:text-gray-400/85 appearance-none antialiased shadow-ui-sm disabled:shadow-none disabled:opacity-50 read-only:border-dashed not-prose text-base rounded-lg px-3 py-2 h-10 leading-[1.375rem]"
+    }), null, 16, _hoisted_3$1), [
+      [vModelDynamic, $data.trackedValue]
+    ])
+  ]);
+}
+const TrackedInput = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3]]);
+function inputType(value) {
+  if (value === null) return true;
+  if (typeof value === "string") return true;
+  if (typeof value === "number") return true;
+  return false;
+}
+function deslug(string = "") {
+  if (typeof string !== "string") {
+    return string;
+  }
+  return string.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()).replace(/([a-z])([A-Z])/g, "$1 $2");
+}
+function walkObject(object, path, name) {
+  let sub = object;
+  for (let step of path) {
+    sub = sub[step];
+    if (!sub) return void 0;
+  }
+  return sub[name];
+}
+const {
+  Alert,
+  AuthCard,
+  Avatar,
+  Badge,
+  Button,
+  ButtonGroup,
+  Calendar,
+  Card,
+  CardList,
+  CardListItem,
+  CardPanel,
+  CharacterCounter,
+  Checkbox,
+  CheckboxGroup,
+  CodeEditor,
+  Combobox,
+  CommandPaletteItem,
+  ConfirmationModal,
+  Context,
+  ContextFooter,
+  ContextHeader,
+  ContextItem,
+  ContextLabel,
+  ContextMenu,
+  ContextSeparator,
+  CreateForm,
+  DatePicker,
+  DateRangePicker,
+  Description,
+  DocsCallout,
+  DragHandle,
+  Dropdown,
+  DropdownItem,
+  DropdownLabel,
+  DropdownMenu,
+  DropdownSeparator,
+  DropdownFooter,
+  DropdownHeader,
+  Editable,
+  ErrorMessage,
+  EmptyStateItem,
+  EmptyStateMenu,
+  Field,
+  Header,
+  Heading,
+  HoverCard,
+  Icon,
+  Input,
+  InputGroup,
+  InputGroupAppend,
+  InputGroupPrepend,
+  Label,
+  Listing,
+  ListingCustomizeColumns,
+  ListingFilters,
+  ListingHeaderCell,
+  ListingPagination,
+  ListingPresets,
+  ListingPresetTrigger,
+  ListingRowActions,
+  ListingSearch,
+  ListingTable,
+  ListingTableBody,
+  ListingTableHead,
+  ListingToggleAll,
+  LivePreview,
+  LivePreviewPopout,
+  Modal,
+  ModalClose,
+  ModalTitle,
+  Pagination,
+  Panel,
+  PanelFooter,
+  PanelHeader,
+  Popover,
+  PublishComponents,
+  PublishContainer,
+  publishContextKey,
+  injectPublishContext,
+  PublishField,
+  PublishFields,
+  PublishFieldsProvider,
+  PublishForm,
+  PublishLocalizations,
+  PublishSections,
+  PublishTabs,
+  Radio,
+  RadioGroup,
+  Select,
+  Separator,
+  Slider,
+  Skeleton,
+  SplitterGroup,
+  SplitterPanel,
+  SplitterResizeHandle,
+  StatusIndicator,
+  Subheading,
+  Switch,
+  TabContent,
+  Stack,
+  StackClose,
+  StackHeader,
+  StackFooter,
+  StackContent,
+  Table,
+  TableCell,
+  TableColumn,
+  TableColumns,
+  TableRow,
+  TableRows,
+  TabList,
+  TabProvider,
+  Tabs,
+  TabTrigger,
+  Textarea,
+  TimePicker,
+  ToggleGroup,
+  ToggleItem,
+  Widget,
+  registerIconSet,
+  registerIconSetFromStrings
+} = __STATAMIC__.ui;
 const _sfc_main$2 = {
   components: {
+    Button,
     TrackedInput
   },
   props: {
@@ -181,7 +235,7 @@ const _sfc_main$2 = {
   methods: {
     deslug,
     expanded() {
-      this.details = true;
+      this.details = !this.details;
       setTimeout(() => {
         this.grow = !this.grow;
       }, 10);
@@ -190,7 +244,7 @@ const _sfc_main$2 = {
       e.preventDefault();
       window.history.replaceState(window.history.state, "", e.target.href);
       const input = document.getElementById(e.target.href.split("#")[1]);
-      input == null ? void 0 : input.focus();
+      input?.focus();
     }
   },
   mounted() {
@@ -204,38 +258,93 @@ const _sfc_main$2 = {
       }
       setTimeout(() => {
         const el = document.getElementById(window.location.hash.substring(1));
-        if (!el)
-          return;
-        el.closest("[blink-target]").classList.add("blink");
+        if (!el) return;
         el.focus();
       }, 10);
     }
   }
 };
-var _sfc_render$2 = function render2() {
-  var _vm = this, _c = _vm._self._c;
-  return _c("div", { staticClass: "form-group flex gap-3 py-1 [.section+&]:statamic-localize-mt-6 statamic-localize-flex-wrap", attrs: { "blink-target": "" } }, [_c("div", { staticClass: "field-inner truncate w-full md:statamic-localize-w-[15rem] mt-2" }, [_c("label", { staticClass: "publish-field-label", attrs: { "for": `${_vm.site}.${_vm.pathName}`, "title": _vm.pathName } }, [_c("a", { attrs: { "href": `#${_vm.site}.${_vm.pathName}` }, on: { "click": _vm.setAnchor } }, [_vm._v(" " + _vm._s(_vm.deslug(_vm.name)) + " ")])])]), _c("div", { staticClass: "flex gap-4 flex-col statamic-localize-grow" }, [_c("div", { staticClass: "flex gap-2" }, [_c("TrackedInput", { attrs: { "id": `${_vm.site}.${_vm.pathName}`, "name": _vm.formName, "value": _vm.value, "placeholder": _vm.value } }), _vm.altCount ? _c("button", { staticClass: "btn !statamic-localize-px-3 statamic-localize-w-[2.5rem]", attrs: { "type": "button" }, on: { "click": _vm.expanded } }, [_c("svg-icon", { attrs: { "name": "translate" } })], 1) : _vm._e()], 1), _vm.details ? _c("div", { staticClass: "statamic-localize-transition-all statamic-localize-overflow-hidden statamic-localize-m-[0_-2px_-2px_0]", style: {
-    height: _vm.grow ? _vm.altCount * (38 + 8) + 2 + "px" : 0
-  } }, [_c("div", { staticClass: "pt-2 flex gap-2 flex-col statamic-localize-pr-[2px]" }, _vm._l(_vm.alternatives, function(alt) {
-    return _c("div", { key: alt.handle, staticClass: "flex gap-4 statamic-localize-items-center", attrs: { "blink-target": "" } }, [_c("div", { staticClass: "field-inner truncate statamic-localize-w-[8rem]" }, [_c("label", { staticClass: "publish-field-label", attrs: { "for": `${alt.handle}.${_vm.pathName}` } }, [_c("a", { attrs: { "href": `#${alt.handle}.${_vm.pathName}` }, on: { "click": _vm.setAnchor } }, [_vm._v(" " + _vm._s(alt.name) + " ")])])]), _c("TrackedInput", { attrs: { "id": `${alt.handle}.${_vm.pathName}`, "name": `${_vm.formName.replace(`translations[${_vm.site}]`, `translations[${alt.handle}]`)}`, "value": alt.value } })], 1);
-  }), 0)]) : _vm._e()])]);
-};
-var _sfc_staticRenderFns$2 = [];
-var __component__$2 = /* @__PURE__ */ normalizeComponent(
-  _sfc_main$2,
-  _sfc_render$2,
-  _sfc_staticRenderFns$2,
-  false,
-  null,
-  null,
-  null,
-  null
-);
-const Entry = __component__$2.exports;
+const _hoisted_1$1 = { class: "flex flex-wrap gap-3 py-1" };
+const _hoisted_2 = { class: "md:w-64 mt-2 truncate w-full" };
+const _hoisted_3 = ["for", "title"];
+const _hoisted_4 = ["href"];
+const _hoisted_5 = { class: "flex flex-col grow" };
+const _hoisted_6 = { class: "flex gap-3" };
+const _hoisted_7 = { class: "flex flex-col gap-3 pr-1 pt-2" };
+const _hoisted_8 = { class: "truncate w-40" };
+const _hoisted_9 = ["for"];
+const _hoisted_10 = ["href"];
+function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_TrackedInput = resolveComponent("TrackedInput");
+  const _component_Button = resolveComponent("Button");
+  return openBlock(), createElementBlock("div", _hoisted_1$1, [
+    createElementVNode("div", _hoisted_2, [
+      createElementVNode("label", {
+        for: `${$options.site}.${$options.pathName}`,
+        title: $options.pathName,
+        class: "font-medium text-sm"
+      }, [
+        createElementVNode("a", {
+          href: `#${$options.site}.${$options.pathName}`,
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.setAnchor && $options.setAnchor(...args))
+        }, toDisplayString($options.deslug($props.name)), 9, _hoisted_4)
+      ], 8, _hoisted_3)
+    ]),
+    createElementVNode("div", _hoisted_5, [
+      createElementVNode("div", _hoisted_6, [
+        createVNode(_component_TrackedInput, {
+          id: `${$options.site}.${$options.pathName}`,
+          name: $options.formName,
+          value: $props.value,
+          placeholder: $props.value
+        }, null, 8, ["id", "name", "value", "placeholder"]),
+        createVNode(_component_Button, {
+          icon: "hierarchy",
+          onClick: $options.expanded
+        }, null, 8, ["onClick"])
+      ]),
+      $data.details ? (openBlock(), createElementBlock("div", {
+        key: 0,
+        class: "-mr-1 mt-4 overflow-hidden transition-all",
+        style: normalizeStyle({
+          height: $data.grow ? $options.altCount * (40 + 12) + 2 + "px" : 0
+        })
+      }, [
+        createElementVNode("div", _hoisted_7, [
+          (openBlock(true), createElementBlock(Fragment, null, renderList($options.alternatives, (alt) => {
+            return openBlock(), createElementBlock("div", {
+              key: alt.handle,
+              class: "flex gap-4 items-center"
+            }, [
+              createElementVNode("div", _hoisted_8, [
+                createElementVNode("label", {
+                  for: `${alt.handle}.${$options.pathName}`
+                }, [
+                  createElementVNode("a", {
+                    href: `#${alt.handle}.${$options.pathName}`,
+                    onClick: _cache[1] || (_cache[1] = (...args) => $options.setAnchor && $options.setAnchor(...args))
+                  }, toDisplayString(alt.name), 9, _hoisted_10)
+                ], 8, _hoisted_9)
+              ]),
+              createVNode(_component_TrackedInput, {
+                id: `${alt.handle}.${$options.pathName}`,
+                name: `${$options.formName.replace(`translations[${$options.site}]`, `translations[${alt.handle}]`)}`,
+                value: alt.value
+              }, null, 8, ["id", "name", "value"])
+            ]);
+          }), 128))
+        ])
+      ], 4)) : createCommentVNode("", true)
+    ])
+  ]);
+}
+const Entry = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2]]);
 const _sfc_main$1 = {
   name: "Group",
   components: {
-    Entry
+    Card,
+    Entry,
+    Panel
   },
   props: {
     parent: Boolean,
@@ -248,28 +357,48 @@ const _sfc_main$1 = {
     inputType
   }
 };
-var _sfc_render$1 = function render3() {
-  var _vm = this, _c = _vm._self._c;
-  return _vm.inputType(_vm.value) ? _c("Entry", { staticClass: "pl-3 statamic-localize-pr-0", attrs: { "name": _vm.name, "value": _vm.value, "path": _vm.path } }) : _c("fieldset", { staticClass: "border dark:border-dark-900 rounded shadow-sm !statamic-localize-p-2 statamic-localize-mt-5 section" }, [_c("legend", { staticClass: "statamic-localize-translate-y-[-65%] absolute" }, [_c(_vm.parent ? "h3" : "h4", { tag: "component", staticClass: "bg-white dark:bg-dark-600 inline-block statamic-localize-px-3" }, [_vm._v(" " + _vm._s(_vm.deslug(_vm.name)) + " ")])], 1), _vm._l(_vm.value, function(children, key) {
-    return _c("Group", { key, attrs: { "name": key, "value": children, "path": [..._vm.path, _vm.name] } });
-  })], 2);
-};
-var _sfc_staticRenderFns$1 = [];
-var __component__$1 = /* @__PURE__ */ normalizeComponent(
-  _sfc_main$1,
-  _sfc_render$1,
-  _sfc_staticRenderFns$1,
-  false,
-  null,
-  null,
-  null,
-  null
-);
-const Group = __component__$1.exports;
+function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_Entry = resolveComponent("Entry");
+  const _component_Group = resolveComponent("Group", true);
+  const _component_Card = resolveComponent("Card");
+  const _component_Panel = resolveComponent("Panel");
+  return $options.inputType($props.value) ? (openBlock(), createBlock(_component_Entry, {
+    key: 0,
+    name: $props.name,
+    value: $props.value,
+    path: $props.path
+  }, null, 8, ["name", "value", "path"])) : (openBlock(), createBlock(_component_Panel, {
+    key: 1,
+    heading: $options.deslug($props.name),
+    class: "mt-6"
+  }, {
+    default: withCtx(() => [
+      createVNode(_component_Card, null, {
+        default: withCtx(() => [
+          (openBlock(true), createElementBlock(Fragment, null, renderList($props.value, (children, key) => {
+            return openBlock(), createBlock(_component_Group, {
+              name: key,
+              value: children,
+              path: [...$props.path, $props.name],
+              key
+            }, null, 8, ["name", "value", "path"]);
+          }), 128))
+        ]),
+        _: 1
+      })
+    ]),
+    _: 1
+  }, 8, ["heading"]));
+}
+const Group = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1]]);
 const _sfc_main = {
   components: {
+    Button,
+    Card,
     Entry,
-    Group
+    Group,
+    Header,
+    Panel
   },
   props: {
     site: String,
@@ -306,15 +435,13 @@ const _sfc_main = {
     },
     strings() {
       return Object.entries(this.translations).reduce((acc, [key, value]) => {
-        if (inputType(value))
-          acc[key] = value;
+        if (inputType(value)) acc[key] = value;
         return acc;
       }, {});
     },
     objects() {
       return Object.entries(this.translations).reduce((acc, [key, value]) => {
-        if (!inputType(value))
-          acc[key] = value;
+        if (!inputType(value)) acc[key] = value;
         return acc;
       }, {});
     }
@@ -322,11 +449,11 @@ const _sfc_main = {
   provide() {
     return {
       site: this.site,
-      sites: this.trackedSites
+      sites: computed(() => this.trackedSites)
     };
   },
   mounted() {
-    this.saveKeyBinding = Statamic.$keys.bindGlobal(
+    this.saveKeyBinding = this.$keys.bindGlobal(
       ["mod+s", "mod+return"],
       (e) => {
         e.preventDefault();
@@ -338,12 +465,12 @@ const _sfc_main = {
     deslug,
     inputType,
     save() {
-      Statamic.$axios({
+      this.$axios({
         method: "POST",
         url: this.action,
         data: this.$refs.form
       }).then((response) => {
-        Statamic.$toast.success(response.data.status);
+        this.$toast.success(response.data.status);
         this.trackedSites = Object.assign(this.trackedSites, response.data.sites);
       }).catch((error) => this.handleAxiosError(error));
     },
@@ -351,43 +478,95 @@ const _sfc_main = {
       if (e.response && e.response.status === 422) {
         const { message, errors } = e.response.data;
         console.error(errors);
-        Statamic.$toast.error(message);
+        this.$toast.error(message);
       } else if (e.response) {
-        Statamic.$toast.error(e.response.data.message);
+        this.$toast.error(e.response.data.message);
       } else {
-        Statamic.$toast.error(e || "Something went wrong");
+        this.$toast.error(e || "Something went wrong");
       }
     }
   },
-  // In Vue 2, use destroyed instead of unmounted
-  destroyed() {
+  unmounted() {
     this.saveKeyBinding.destroy();
   }
 };
-var _sfc_render = function render4() {
-  var _vm = this, _c = _vm._self._c;
-  return _c("form", { ref: "form", on: { "submit": function($event) {
-    $event.preventDefault();
-    return _vm.save.apply(null, arguments);
-  } } }, [_c("header", { staticClass: "mb-8" }, [_c("button", { staticClass: "statamic-localize-float-right btn-primary" }, [_vm._v(_vm._s(_vm.__("Save")))]), _c("h1", [_vm._v(_vm._s(_vm.__("localize::general.title")))]), _c("p", { domProps: { "innerHTML": _vm._s(_vm.__("localize::general.intro")) } })]), Object.keys(_vm.strings).length ? _c("section", { staticClass: "card py-5 px-6 content statamic-localize-mb-6 form-group" }, _vm._l(_vm.strings, function(value, first) {
-    return _c("Entry", { key: first, staticClass: "px-0", attrs: { "name": first, "value": value, "path": [] } });
-  }), 1) : _vm._e(), _vm._l(_vm.objects, function(value, first) {
-    return _c("section", { key: first, staticClass: "card p-0 content statamic-localize-mb-6 form-group" }, [_c("header", { staticClass: "publish-section-header @container" }, [_c("div", { staticClass: "publish-section-header-inner" }, [_c("h2", { staticClass: "text-base font-semibold mb-1" }, [_vm._v(_vm._s(_vm.deslug(first)))])])]), _c("div", { staticClass: "py-5 px-6" }, [_vm._l(value, function(secondValue, second) {
-      return [_vm.inputType(secondValue) ? _c("Entry", { staticClass: "px-0", attrs: { "name": second, "value": secondValue, "path": [first] } }) : _c("Group", { staticClass: "statamic-localize-mb-1", attrs: { "name": second, "value": secondValue, "path": [first], "parent": "" } })];
-    })], 2)]);
-  }), Object.values(_vm.translations).length === 0 ? _c("section", { staticClass: "card p-6 content" }, [_c("p", [_vm._v(_vm._s(_vm.__("localize::general.no_content")))])]) : _vm._e()], 2);
-};
-var _sfc_staticRenderFns = [];
-var __component__ = /* @__PURE__ */ normalizeComponent(
-  _sfc_main,
-  _sfc_render,
-  _sfc_staticRenderFns,
-  false,
-  null,
-  null,
-  null,
-  null
-);
-const LocalizeList = __component__.exports;
-const cp = "";
+const _hoisted_1 = ["innerHTML"];
+function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_Button = resolveComponent("Button");
+  const _component_Header = resolveComponent("Header");
+  const _component_Entry = resolveComponent("Entry");
+  const _component_Group = resolveComponent("Group");
+  const _component_Card = resolveComponent("Card");
+  const _component_Panel = resolveComponent("Panel");
+  return openBlock(), createElementBlock("form", {
+    class: "max-w-5xl 3xl:max-w-5xl 3xl:max-w-6xl mx-auto",
+    onSubmit: _cache[0] || (_cache[0] = withModifiers((...args) => $options.save && $options.save(...args), ["prevent"])),
+    ref: "form"
+  }, [
+    createVNode(_component_Header, {
+      title: _ctx.__("localize::general.title"),
+      icon: "dictionary-language-book"
+    }, {
+      default: withCtx(() => [
+        createVNode(_component_Button, {
+          text: _ctx.__("Save"),
+          type: "submit",
+          variant: "primary"
+        }, null, 8, ["text"])
+      ]),
+      _: 1
+    }, 8, ["title"]),
+    createElementVNode("p", {
+      innerHTML: _ctx.__("localize::general.intro"),
+      class: "mb-6 text-sm"
+    }, null, 8, _hoisted_1),
+    (openBlock(true), createElementBlock(Fragment, null, renderList($options.strings, (value, first) => {
+      return openBlock(), createBlock(_component_Entry, {
+        key: first,
+        name: first,
+        value,
+        path: []
+      }, null, 8, ["name", "value"]);
+    }), 128)),
+    (openBlock(true), createElementBlock(Fragment, null, renderList($options.objects, (value, first) => {
+      return openBlock(), createBlock(_component_Panel, {
+        heading: $options.deslug(first),
+        key: first,
+        class: "mt-6"
+      }, {
+        default: withCtx(() => [
+          createVNode(_component_Card, null, {
+            default: withCtx(() => [
+              (openBlock(true), createElementBlock(Fragment, null, renderList(value, (secondValue, second) => {
+                return openBlock(), createElementBlock(Fragment, { key: second }, [
+                  $options.inputType(secondValue) ? (openBlock(), createBlock(_component_Entry, {
+                    key: 0,
+                    name: second,
+                    value: secondValue,
+                    path: [first]
+                  }, null, 8, ["name", "value", "path"])) : (openBlock(), createBlock(_component_Group, {
+                    key: 1,
+                    name: second,
+                    value: secondValue,
+                    path: [first],
+                    parent: ""
+                  }, null, 8, ["name", "value", "path"]))
+                ], 64);
+              }), 128))
+            ]),
+            _: 2
+          }, 1024)
+        ]),
+        _: 2
+      }, 1032, ["heading"]);
+    }), 128)),
+    Object.values($options.translations).length === 0 ? (openBlock(), createBlock(_component_Card, { key: 0 }, {
+      default: withCtx(() => [
+        createElementVNode("p", null, toDisplayString(_ctx.__("localize::general.no_content")), 1)
+      ]),
+      _: 1
+    })) : createCommentVNode("", true)
+  ], 544);
+}
+const LocalizeList = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
 Statamic.$components.register("localize-list", LocalizeList);

@@ -15,15 +15,15 @@ use Teamfurther\Localize\Services\LangFileService;
 class ServiceProvider extends AddonServiceProvider
 {
     protected $scripts = [
-        __DIR__.'/../resources/dist/js/cp.js',
+        __DIR__ . '/../resources/dist/js/cp.js',
     ];
 
     protected $stylesheets = [
-        __DIR__.'/../resources/dist/css/cp.css',
+        __DIR__ . '/../resources/dist/css/cp.css',
     ];
 
     protected $routes = [
-        'cp' => __DIR__.'/../routes/cp.php',
+        'cp' => __DIR__ . '/../routes/cp.php',
     ];
 
     public function bootAddon()
@@ -32,14 +32,15 @@ class ServiceProvider extends AddonServiceProvider
             $this->ensureFiles();
         });
 
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'localize');
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'localize');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'localize');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'localize');
 
         $this->publishes([
-            __DIR__.'/../config/localize.php' => config_path('localize.php'),
+            __DIR__ . '/../config/localize.php' => config_path('localize.php'),
         ], 'localize-config');
         $this->mergeConfigFrom(
-            __DIR__.'/../config/localize.php', 'localize'
+            __DIR__ . '/../config/localize.php',
+            'localize'
         );
 
         $this->bootAddonPermissions();
@@ -55,7 +56,7 @@ class ServiceProvider extends AddonServiceProvider
         Site::all()->each(function ($site) use ($langFileService) {
             $path = $langFileService->path($site->handle());
             File::ensureDirectoryExists(dirname($path));
-            if (! File::exists($path)) {
+            if (!File::exists($path)) {
                 File::put($path, '{}');
             }
         });
@@ -73,7 +74,7 @@ class ServiceProvider extends AddonServiceProvider
         Nav::extend(function ($nav) {
             $nav->content('Localize')
                 ->route('localize.dashboard')
-                ->icon('partial')
+                ->icon('dictionary-language-book')
                 ->can('edit localize');
         });
     }
@@ -85,12 +86,12 @@ class ServiceProvider extends AddonServiceProvider
             return false;
         }
 
-        if (! config('statamic.api.enabled') && ! config('statamic.graphql.enabled')) {
+        if (!config('statamic.api.enabled') && !config('statamic.graphql.enabled')) {
             return false;
         }
 
         Route::prefix(config('localize.api_route'))->group(function () {
-            Site::all()->each(fn ($site) => Route::get(
+            Site::all()->each(fn($site) => Route::get(
                 $site->handle(),
                 [PublicController::class, 'serve']
             ));

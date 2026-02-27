@@ -27,7 +27,7 @@ composer require teamfurther/statamic-localize
 After installation, you may wish to publish the package configuration:
 
 ```bash
-php artisan vendor:publish --provider="Teamfurther\\Localize\\LocalizeServiceProvider"
+php artisan vendor:publish --provider="Teamfurther\\Localize\\ServiceProvider"
 ```
 
 This will create a `localize.php` config file in your `config` directory.
@@ -52,7 +52,7 @@ If not changed the default route is `/api/localize/{lang}.json`
 
 ### Building Assets
 
-This package uses Vite and Vue 2 for its frontend assets. To build the assets:
+This package uses Vite and Vue 3 for its frontend assets. To build the assets:
 
 1. Install dependencies:
 ```bash

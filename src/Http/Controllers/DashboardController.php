@@ -25,7 +25,7 @@ class DashboardController
 
     public function update(Request $request)
     {
-        Site::all()->each(function (string $key) use ($request) {
+        Site::all()->each(function ($site, $key) use ($request) {
 
             $translation = $request->input('translations');
 
@@ -48,7 +48,7 @@ class DashboardController
 
     private function getSites()
     {
-        return Site::all()->map(fn ($site) => [
+        return Site::all()->map(fn($site) => [
             'handle' => $site->handle(),
             'name' => $site->name(),
             'translations' => $this->langFileService->get($site->handle()),
